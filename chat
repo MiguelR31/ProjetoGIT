@@ -1,0 +1,204 @@
+Claro! Vou explicar cada comando avançado do Git mencionado anteriormente para ajudá-lo a entender melhor suas funções e usos.
+
+### Diagnóstico e Solução de Problemas
+
+1. **Verificar o Histórico de Commits:**
+   ```sh
+   git log
+   ```
+   - Exibe o histórico de commits, mostrando hash, autor, data e mensagem de cada commit.
+
+2. **Verificar as Diferenças:**
+   - Verificar as diferenças entre o repositório local e o remoto:
+     ```sh
+     git diff origin/main
+     ```
+   - Mostra as diferenças entre o código local e a branch remota chamada `main`.
+
+3. **Verificar o Estado dos Arquivos:**
+   ```sh
+   git status
+   ```
+   - Exibe o estado atual do diretório de trabalho e da área de staging, mostrando arquivos modificados, novos arquivos e arquivos prontos para commit.
+
+4. **Verificar os Commits Pendentes de Push/Pull:**
+   ```sh
+   git log --oneline origin/main..HEAD
+   ```
+   - Lista os commits na branch local que não foram enviados para o repositório remoto.
+
+5. **Verificar o Histórico de Branch:**
+   ```sh
+   git reflog
+   ```
+   - Exibe um log de todas as referências de HEAD, mostrando uma lista dos comandos recentes que mudaram o estado do repositório.
+
+### Resolver Conflitos de Merge
+
+1. **Rebase Interativo:**
+   - Reescrever o histórico de commits:
+     ```sh
+     git rebase -i HEAD~3
+     ```
+   - Permite reescrever os últimos 3 commits, oferecendo opções para modificar, combinar ou reordenar commits.
+
+2. **Mesclar Alterações de Branch:**
+   ```sh
+   git merge nome-da-branch
+   ```
+   - Mescla a branch especificada (`nome-da-branch`) na branch atual, combinando mudanças.
+
+3. **Abortar um Merge:**
+   ```sh
+   git merge --abort
+   ```
+   - Cancela um merge em andamento e reverte o estado do repositório para antes do início do merge.
+
+4. **Abortar um Rebase:**
+   ```sh
+   git rebase --abort
+   ```
+   - Cancela um rebase em andamento e reverte o estado do repositório para antes do início do rebase.
+
+### Trabalhando com Branches
+
+1. **Criar uma Nova Branch:**
+   ```sh
+   git checkout -b nova-branch
+   ```
+   - Cria e muda para uma nova branch chamada `nova-branch`.
+
+2. **Listar Todas as Branches:**
+   ```sh
+   git branch -a
+   ```
+   - Lista todas as branches locais e remotas.
+
+3. **Excluir uma Branch Local:**
+   ```sh
+   git branch -d nome-da-branch
+   ```
+   - Exclui uma branch local chamada `nome-da-branch` (se a branch tiver mudanças não mescladas, use `-D` para forçar a exclusão).
+
+4. **Excluir uma Branch Remota:**
+   ```sh
+   git push origin --delete nome-da-branch
+   ```
+   - Exclui uma branch remota chamada `nome-da-branch`.
+
+### Revisões e Resets
+
+1. **Resetar um Commit:**
+   - Hard Reset (descartar mudanças):
+     ```sh
+     git reset --hard HEAD~1
+     ```
+   - Move o HEAD e a branch atual para o commit anterior e descarta todas as mudanças no diretório de trabalho.
+
+   - Soft Reset (manter mudanças como não rastreadas):
+     ```sh
+     git reset --soft HEAD~1
+     ```
+   - Move o HEAD e a branch atual para o commit anterior, mantendo as mudanças no diretório de trabalho como não rastreadas.
+
+2. **Reverter um Commit:**
+   ```sh
+   git revert SHA_DO_COMMIT
+   ```
+   - Cria um novo commit que desfaz as mudanças do commit especificado pelo SHA, preservando o histórico.
+
+### Trabalhando com Stash
+
+1. **Salvar Mudanças no Stash:**
+   ```sh
+   git stash
+   ```
+   - Salva as mudanças não commitadas em um stack temporário e limpa o diretório de trabalho.
+
+2. **Aplicar Mudanças do Stash:**
+   ```sh
+   git stash apply
+   ```
+   - Aplica as mudanças do stash mais recente no diretório de trabalho, mantendo o stash na pilha.
+
+3. **Listar Stashes:**
+   ```sh
+   git stash list
+   ```
+   - Lista todos os stashes armazenados.
+
+4. **Apagar um Stash:**
+   ```sh
+   git stash drop
+   ```
+   - Remove o stash mais recente da pilha.
+
+### Sincronização e Submódulos
+
+1. **Sincronizar o Repositório Local com o Remoto:**
+   ```sh
+   git fetch origin
+   git reset --hard origin/main
+   ```
+   - `git fetch origin`: Obtém as últimas mudanças do repositório remoto sem mesclá-las.
+   - `git reset --hard origin/main`: Reseta o diretório de trabalho e a branch atual para a última versão da branch `main` do repositório remoto.
+
+2. **Adicionar um Submódulo:**
+   ```sh
+   git submodule add https://github.com/usuario/repositorio
+   ```
+   - Adiciona um repositório Git externo como um submódulo ao seu projeto.
+
+3. **Atualizar Submódulos:**
+   ```sh
+   git submodule update --remote
+   ```
+   - Atualiza os submódulos para a última versão dos seus branches remotos rastreados.
+
+### Forçar o Push
+
+**Atenção:** Usar `--force` pode sobrescrever mudanças no repositório remoto. Use com cuidado.
+
+1. **Forçar o Push:**
+   ```sh
+   git push --force origin main
+   ```
+   - Força a atualização da branch remota `main` com o estado atual da branch local `main`, sobrescrevendo quaisquer mudanças remotas que não estejam na sua branch local.
+
+### Checklist Final
+
+Se você ainda estiver enfrentando problemas com o `git push`, verifique este checklist:
+
+1. **Verifique o Estado dos Arquivos:**
+   ```sh
+   git status
+   ```
+   - Certifique-se de que não há arquivos não rastreados ou não commitados.
+
+2. **Verifique as Diferenças:**
+   ```sh
+   git diff
+   ```
+   - Revise as mudanças não commitadas para entender o que será enviado.
+
+3. **Verifique os Logs:**
+   ```sh
+   git log
+   ```
+   - Verifique o histórico de commits para garantir que suas mudanças foram commitadas corretamente.
+
+4. **Verifique as Branches:**
+   ```sh
+   git branch
+   ```
+   - Certifique-se de que você está na branch correta.
+
+5. **Verifique os Commits Pendente de Push/Pull:**
+   ```sh
+   git log --oneline origin/main..HEAD
+   ```
+   - Veja os commits que estão na branch local e que ainda não foram enviados para o repositório remoto.
+
+### Ajuda Adicional
+
+Se precisar de mais ajuda, forneça a mensagem de erro específica que está recebendo ou descreva o comportamento que está observando. Isso permitirá que eu forneça uma assistência mais direcionada e eficaz.
